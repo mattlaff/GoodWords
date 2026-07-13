@@ -1,0 +1,19 @@
+{{ define "main" }}
+
+<section class="home-intro">
+  <p>
+    the internet for me an inhabited garden
+  </p>
+</section>
+
+<nav class="home-nav" aria-label="Main navigation">
+<p><a href="{{ "about/" | relURL }}">about</a></p>
+  <p><a href="{{ "poems/" | relURL }}">browse poems</a></p>
+  <p><a href="{{ "quotes/" | relURL }}">browse quotes</a></p>
+  <p><a href="{{ "featured/" | relURL }}">Featured Selection</a></p>
+  <p><a href="{{ "random/" | relURL }}">Random Selection</a></p>
+  <p><a href="{{ "recently-added/" | relURL }}">Recently Added</a></p>
+  <p><a href="{{ "recently-updated/" | relURL }}">Recently Updated</a></p>
+</nav>
+
+{{ end }}

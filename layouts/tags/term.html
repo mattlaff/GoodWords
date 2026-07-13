@@ -1,0 +1,63 @@
+{{- define "main" }}
+
+<section>
+
+    <h2>#{{ .Title | lower }}</h2>
+
+    <p>
+        <a href="{{ "quotes/" | relURL }}">Back to all quotes</a>
+    </p>
+
+    {{ $quotes := sort (where .Pages "Section" "quotes") ".Params.author" }}
+
+    {{ $currentAuthor := "" }}
+
+    {{ range $quotes }}
+
+        {{ $author := .Params.author }}
+
+        {{ if ne $author $currentAuthor }}
+
+            {{ if ne $currentAuthor "" }}
+                </ul>
+            {{ end }}
+
+            <h3>{{ $author }}</h3>
+            <ul class="quote-list">
+
+            {{ $currentAuthor = $author }}
+
+        {{ end }}
+
+        <li>
+            <a href="{{ .RelPermalink }}">{{ .Params.preview }}</a>
+        </li>
+
+    {{ end }}
+
+    {{ if ne $currentAuthor "" }}
+        </ul>
+    {{ end }}
+
+</section>
+
+<style>
+.quote-list {
+    margin-top: 0.25rem;
+}
+
+.quote-list li {
+    margin-bottom: 0.35rem;
+}
+
+.quote-list li:last-child {
+    margin-bottom: 1rem;
+}
+
+h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.35rem;
+}
+</style>
+
+{{- end }}

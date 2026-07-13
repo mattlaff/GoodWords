@@ -1,0 +1,14 @@
+baseURL = 'https://mattlaff.github.io/GoodWords/'
+locale = 'en-us'
+title = 'GoodWords'
+theme = "dario"
+
+[taxonomies]
+  poet = "poets"
+  author = "authors"
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      hardWraps = true

@@ -1,0 +1,93 @@
+{{- define "main" }}
+
+<section>
+
+    <h2>{{ .Title | .RenderString }}</h2>
+
+    {{ .Content }}
+
+    <nav class="quote-tags" aria-label="Quote categories">
+        <a href="{{ "tags/beauty/" | relURL }}">#beauty</a>
+        <a href="{{ "tags/love/" | relURL }}">#love</a>
+        <a href="{{ "tags/mystery/" | relURL }}">#mystery</a>
+        <a href="{{ "tags/presence/" | relURL }}">#presence</a>
+        <a href="{{ "tags/truth/" | relURL }}">#truth</a>
+    </nav>
+
+    {{ $quotes := sort (where .Site.RegularPages "Section" "quotes") ".File.BaseFileName" }}
+
+    {{ $currentAuthor := "" }}
+
+    {{ range $quotes }}
+
+        {{ if ne .Params.author $currentAuthor }}
+
+            {{ if ne $currentAuthor "" }}
+                </ul>
+            {{ end }}
+
+            <h3>{{ .Params.author }}</h3>
+            <ul class="quote-list">
+
+            {{ $currentAuthor = .Params.author }}
+
+        {{ end }}
+
+        <li>
+            <a href="{{ .RelPermalink }}">
+                {{ .Params.preview }}
+            </a>
+
+            {{ with .GetTerms "tags" }}
+                {{ range . }}
+                    <a class="quote-tag" href="{{ .RelPermalink }}">#{{ .LinkTitle | lower }}</a>
+                {{ end }}
+            {{ end }}
+        </li>
+
+    {{ end }}
+
+    </ul>
+
+</section>
+
+<style>
+.quote-list {
+    margin-top: 0.25rem;
+}
+
+.quote-list li {
+    margin-bottom: 0.35rem;
+}
+
+.quote-list li:last-child {
+    margin-bottom: 1rem;
+}
+
+.quote-list h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.35rem;
+}
+
+.quote-tag {
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+    color: #777;
+    text-decoration: none;
+}
+
+.quote-tag:hover {
+    text-decoration: underline;
+}
+
+.quote-tags {
+    margin: 1rem 0 1.5rem;
+}
+
+.quote-tags a {
+    margin-right: 0.75rem;
+    font-size: 0.9rem;
+}
+</style>
+
+{{- end }}

@@ -1,0 +1,41 @@
+{{ define "main" }}
+
+<article class="quote-entry">
+
+  <div class="quote-text">
+    {{ .Content }}
+  </div>
+
+  {{ with .GetTerms "tags" }}
+    <nav class="quote-page-tags" aria-label="Quote categories">
+      {{ range . }}
+        <a href="{{ .RelPermalink }}">#{{ .LinkTitle | lower }}</a>
+      {{ end }}
+    </nav>
+  {{ end }}
+
+</article>
+
+<style>
+  .quote-entry {
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  .quote-page-tags {
+    margin-top: 2rem;
+  }
+
+  .quote-page-tags a {
+    margin-right: 0.75rem;
+    font-size: 0.9rem;
+    color: #777;
+    text-decoration: none;
+  }
+
+  .quote-page-tags a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+{{ end }}

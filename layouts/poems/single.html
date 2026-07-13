@@ -1,0 +1,49 @@
+{{ define "main" }}
+
+<article class="poem-entry">
+
+<header class="poem-header">
+  <h1>{{ .Title }}</h1>
+
+  {{ with .Params.poets }}
+    <p class="poem-poet">
+      <a href="{{ "poets/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
+    </p>
+  {{ end }}
+</header>
+
+  <div class="poem-text">
+    {{ .Content }}
+  </div>
+
+</article>
+
+<style>
+  .poem-entry {
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  .poem-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .poem-poet {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .poem-poet a {
+    color: #666;
+    text-decoration: none;
+  }
+
+  .poem-poet a:hover {
+    text-decoration: underline;
+  }
+
+</style>
+
+{{ end }}

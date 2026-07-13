@@ -1,0 +1,61 @@
+{{- define "main" }}
+
+<section>
+
+    <h2>{{ .Title | .RenderString }}</h2>
+
+    {{ .Content }}
+
+    {{ $pages := sort (where .Site.RegularPages "Section" .Section) ".File.BaseFileName" }}
+
+    {{ $currentPoet := "" }}
+
+    {{ range $pages }}
+
+        {{ $poet := .Params.poets }}
+
+        {{ if ne $poet $currentPoet }}
+
+            {{ if ne $currentPoet "" }}
+                </ul>
+            {{ end }}
+
+            <h3>{{ $poet }}</h3>
+            <ul class="poem-list">
+
+            {{ $currentPoet = $poet }}
+
+        {{ end }}
+
+        <li>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </li>
+
+    {{ end }}
+
+    {{ if ne $currentPoet "" }}
+        </ul>
+    {{ end }}
+
+</section>
+
+<style>
+.poem-list {
+    margin-top: 0.25rem;
+}
+
+.poem-list li {
+    margin-bottom: 0.35rem;
+}
+
+.poem-list li:last-child {
+    margin-bottom: 1rem;
+}
+
+h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.35rem;
+}
+</style>
+
+{{- end }}
