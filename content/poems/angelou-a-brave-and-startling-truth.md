@@ -1,8 +1,8 @@
 +++
 title = 'A Brave and Startling Truth'
 poets = 'Maya Angelou'
-date_added = '{{ .Date | time.Format "2026-07-10" }}'
-date_updated = '{{ .Date | time.Format "2026-07-10" }}'
+date_added = '2026-07-10'
+date_updated = '2026-07-10'
 draft = false
 has_reflection = true
 +++

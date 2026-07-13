@@ -1,0 +1,42 @@
+{{ $mode := .Get "mode" }}
+
+{{ $items := where .Site.RegularPages "Section" "in" (slice "poems" "quotes") }}
+
+{{ if eq $mode "recently-added" }}
+  {{ $items = sort $items "Params.date_added" "desc" }}
+{{ end }}
+
+{{ $items = first 10 $items }}
+
+<ul class="selection-list">
+{{ range $items }}
+  {{ $item := . }}
+  <li>
+
+    {{ if eq $item.Section "poems" }}
+
+      <strong>Poem:</strong>
+      <a href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>,
+      {{ with $item.Params.poets }}
+        {{ if reflect.IsSlice . }}
+          {{ delimit . ", " }}
+        {{ else }}
+          {{ . }}
+        {{ end }}
+      {{ end }}
+
+    {{ else if eq $item.Section "quotes" }}
+
+      <strong>Quote:</strong>
+      <a href="{{ $item.RelPermalink }}">{{ with $item.Params.preview }}{{ . }}{{ else }}{{ $item.Title }}{{ end }}</a>,
+      {{ with $item.Params.author }}{{ . }}{{ end }}
+
+    {{ end }}
+
+    {{ with $item.Params.date_added }}
+      ({{ time.AsTime . | time.Format "01/02/06" }})
+    {{ end }}
+
+  </li>
+{{ end }}
+</ul>

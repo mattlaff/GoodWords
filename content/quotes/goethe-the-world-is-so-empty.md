@@ -2,8 +2,8 @@
 author = 'Johann Wolfgang von Goethe'
 tags = 'love'
 preview = 'The world is so empty...'
-date_added = '{{ .Date | time.Format "2026-07-09" }}'
-date_updated = '{{ .Date | time.Format "2026-07-09" }}'
+date_added = '2026-07-09'
+date_updated = '2026-07-09'
 draft = false
 has_reflection = true
 +++
