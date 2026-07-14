@@ -1,12 +1,5 @@
-## Good Words | Archive
+GoodWords is a kind of digital commonplace book: a personal collection of poems, quotations, and brief reflections. My goal is not simply to archive texts, but to think publicly about why the texts are important to me (I expand on the project [here](https://mattlaff.github.io/GoodWords/about/))
 
-[Home Page](https://mattlaff.writeas.com)<br>
-[About Good Words](https://mattlaff.writeas.com/about-good-words)
+This repo runs on Hugo and can be viewed as intended [here](https://mattlaff.github.io/GoodWords/)
 
-### poetry
-* [Chronological](poems-chron.md)
-* [Alphabetical by Author](poems-alpha.md)
-
-### quotes
-* [Chronological](quotes-chron.md)
-* [Alphabetical by Author](quotes-alpha.md)
+Enjoy.
