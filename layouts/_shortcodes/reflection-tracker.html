@@ -1,12 +1,21 @@
-{{ $items := where .Site.RegularPages "Section" "in" (slice "poems" "quotes") }}
-{{ $items = where $items "Params.has_reflection" "ne" true }}
+{{ $poems := slice }}
+{{ $quotes := slice }}
 
-{{ $poems := where $items "Section" "poems" }}
-{{ $quotes := where $items "Section" "quotes" }}
+{{ range where .Site.RegularPages "Section" "poems" }}
+  {{ if not .Params.has_reflection }}
+    {{ $poems = $poems | append . }}
+  {{ end }}
+{{ end }}
+
+{{ range where .Site.RegularPages "Section" "quotes" }}
+  {{ if not .Params.has_reflection }}
+    {{ $quotes = $quotes | append . }}
+  {{ end }}
+{{ end }}
 
 <h2>Poems without reflections</h2>
 
-{{ if $poems }}
+{{ if gt (len $poems) 0 }}
   <ul>
     {{ range sort $poems "Title" }}
       <li>
@@ -23,13 +32,11 @@
 
 <h2>Quotes without reflections</h2>
 
-{{ if $quotes }}
+{{ if gt (len $quotes) 0 }}
   <ul>
     {{ range sort $quotes "Params.author" }}
       <li>
-        <a href="{{ .RelPermalink }}">
-          {{ with .Params.preview }}{{ . }}{{ else }}{{ .Title }}{{ end }}
-        </a>
+        <a href="{{ .RelPermalink }}">{{ with .Params.preview }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
         {{ with .Params.author }} — {{ . }}{{ end }}
       </li>
     {{ end }}

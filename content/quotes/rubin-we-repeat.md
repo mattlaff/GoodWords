@@ -1,5 +1,5 @@
 +++
-author = 'Grethen Rubin'
+author = 'Gretchen Rubin'
 tags = 'presence'
 preview = 'We repeat about 40 percent...'
 date_added = '2026-07-14'
