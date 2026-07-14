@@ -4,6 +4,10 @@
 
 {{ if eq $mode "recently-added" }}
   {{ $items = sort $items "Params.date_added" "desc" }}
+{{ else if eq $mode "recently-updated" }}
+  {{ $items = sort $items "Params.date_updated" "desc" }}
+{{ else }}
+  {{ errorf "Unknown selection-list mode: %q" $mode }}
 {{ end }}
 
 {{ $items = first 10 $items }}
@@ -11,8 +15,8 @@
 <ul class="selection-list">
 {{ range $items }}
   {{ $item := . }}
-  <li>
 
+  <li>
     {{ if eq $item.Section "poems" }}
 
       <strong>Poem:</strong>
@@ -33,10 +37,15 @@
 
     {{ end }}
 
-    {{ with $item.Params.date_added }}
-      ({{ time.AsTime . | time.Format "01/02/06" }})
+    {{ if eq $mode "recently-added" }}
+      {{ with $item.Params.date_added }}
+        ({{ time.AsTime . | time.Format "01/02/06" }})
+      {{ end }}
+    {{ else if eq $mode "recently-updated" }}
+      {{ with $item.Params.date_updated }}
+        ({{ time.AsTime . | time.Format "01/02/06" }})
+      {{ end }}
     {{ end }}
-
   </li>
 {{ end }}
 </ul>

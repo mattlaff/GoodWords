@@ -281,13 +281,15 @@ header h1 a {
   font-family: var(--font-family-base), serif;
   font-weight: 600;
   font-size: 1.2em;
-  line-height: 44px;
+  line-height: 1.3;
   margin-block: 0;
   margin-inline: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  inline-size: 250px;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  inline-size: auto;
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
   padding-block-start: 2px;
 }
 

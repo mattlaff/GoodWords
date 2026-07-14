@@ -1,0 +1,39 @@
+{{ $items := where .Site.RegularPages "Section" "in" (slice "poems" "quotes") }}
+{{ $items = where $items "Params.has_reflection" "ne" true }}
+
+{{ $poems := where $items "Section" "poems" }}
+{{ $quotes := where $items "Section" "quotes" }}
+
+<h2>Poems without reflections</h2>
+
+{{ if $poems }}
+  <ul>
+    {{ range sort $poems "Title" }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ with .Params.poets }}
+          — {{ if reflect.IsSlice . }}{{ delimit . ", " }}{{ else }}{{ . }}{{ end }}
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ else }}
+  <p>All poems have reflections.</p>
+{{ end }}
+
+<h2>Quotes without reflections</h2>
+
+{{ if $quotes }}
+  <ul>
+    {{ range sort $quotes "Params.author" }}
+      <li>
+        <a href="{{ .RelPermalink }}">
+          {{ with .Params.preview }}{{ . }}{{ else }}{{ .Title }}{{ end }}
+        </a>
+        {{ with .Params.author }} — {{ . }}{{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ else }}
+  <p>All quotes have reflections.</p>
+{{ end }}
