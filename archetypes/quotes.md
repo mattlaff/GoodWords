@@ -8,4 +8,4 @@ draft = false
 has_reflection = false
 +++
 
-Write the quote here.
+**"QUOTE HERE"** _~AUTHOR HERE_

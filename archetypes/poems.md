@@ -7,4 +7,6 @@ draft = false
 has_reflection = false
 +++
 
-Write the poem or excerpt here.
+POEM EXCERPT HERE
+
+([full poem](EXTERNAL LINK HERE))
